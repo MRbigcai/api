@@ -20,7 +20,7 @@ class Model extends \App\Common\Model
      */
     public function login($phone, $pwd){
         global $postValues;
-        $result = $this->db->select('uid,name,ryToken')->from('def_user')->where("phone=". $phone . " and pwd='" .md5($pwd) . "'")->query()->fetch();
+        $result = $this->db->select('*')->from('def_user')->where("phone=". $phone . " and pwd='" .md5($pwd) . "'")->query()->fetch();
         if(!is_numeric($result['uid']) || empty($result['uid'])){
             response(403,'用户名或密码错误');
         }
@@ -30,6 +30,13 @@ class Model extends \App\Common\Model
             $data = array();
             $data['uid'] = $result['uid'];
             $data['name'] = $result['name'];
+            $data['mail'] = $result['mail'];
+            $data['birthday'] = $result['birthday'];
+            $data['signature'] = $result['signature'];
+            $data['province'] = $result['province'];
+            $data['city'] = $result['city'];
+            $data['county'] = $result['county'];
+            $data['sex'] = $result['sex'];
             $data['ryToken'] = $result['ryToken'];
 //            $data['token'] = $postValues['token'];
             response(200,'success',$data);
