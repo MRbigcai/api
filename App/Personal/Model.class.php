@@ -39,14 +39,15 @@ class Model extends \App\Common\Model
      */
     public function getFollowingMessage($uid,$page,$pageSize){
         $offset=$pageSize*($page-1);
+        $data['followingCount'] = $this->db->select('followingCount')->from('def_user')->where('uid=' . $uid)->query()->fetchAll();
         $allIdArr = $this->db->select('followingUid')->from('def_user_relation_following')->where('fromUid = ' . $uid)->limit($offset, $pageSize)->query()->fetchAll();
         $allIdString = '';
         foreach ($allIdArr as $key => $value){
             $allIdString .= $value['followingUid'] .",";
         }
         $allIdString = trim($allIdString,',');
-        $followingMessage = $this->getUserMessage('uid,name,icon,sex', $allIdString);
-        return $followingMessage;
+        $data['followingMessage'] = $this->getUserMessage('uid,name,icon,sex,signature', $allIdString);
+        return $data;
         
     }
     
@@ -73,7 +74,12 @@ class Model extends \App\Common\Model
         $values['followerUid'] = $value['followingUid'];
         $values['addTime'] = $value['addTime'];
         $row = $this->db->insert('def_user_relation_follower', $values)->exec();
-        return $row;
+        if($row){
+            $this->db->execSql("update def_user set followingCount=followingCount+1 where uid=" . $value['fromUid']);
+            $this->db->execSql("update def_user set followerCount=follower+1 where uid=" . $value['followingUid']);
+            
+        }
+        return '';
     }
     
     /*

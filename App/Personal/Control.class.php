@@ -24,7 +24,9 @@ class Control extends \App\Common\Control
         $data['common'] = $this->model->getFollowingInCommon($myId, $theOtherId);
         $page = isset($this->values['page'])?$this->values['page']:1;
         $pageSize = 10;
-        $data['following'] = $this->model->getFollowingMessage($theOtherId, $page, $pageSize);
+        $message = $this->model->getFollowingMessage($theOtherId, $page, $pageSize);
+        $data['following'] = $message['followingMessage'];
+        $data['followingCount'] =  $message['followingCount'];
         response(200,'success',$data);
     
     }
