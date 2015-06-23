@@ -12,9 +12,9 @@ class Model extends \App\Common\Model
     public function getFollowingInCommon($myId, $theOtherId){
         //get all the uid in common
        $sql = "select followingUid from def_user_relation_following 
-                where fromUid=" . $myId . " 
-                and followingUid in 
-                (select followingUid from def_user_relation_following where fromUid=" . $theOtherId .");";
+               where fromUid=" . $myId . " 
+               and followingUid in 
+                   (select followingUid from def_user_relation_following where fromUid=" . $theOtherId .");";
         $allIdArr = $this->db->querySql($sql);
         if($allIdArr){
             $followingIdInCommon = '';
@@ -37,7 +37,7 @@ class Model extends \App\Common\Model
      * param int $pageSize
      * return followingArr
      */
-    public function getFollowingMessage($uid,$page,$pageSize){
+    public function getFollowingMessage($myId,$uid,$page,$pageSize){
         $offset=$pageSize*($page-1);
         $data['followingCount'] = $this->db->select('followingCount')->from('def_user')->where('uid=' . $uid)->query()->fetchAll();
         $allIdArr = $this->db->select('followingUid')->from('def_user_relation_following')->where('fromUid = ' . $uid)->limit($offset, $pageSize)->query()->fetchAll();
@@ -46,9 +46,27 @@ class Model extends \App\Common\Model
             $allIdString .= $value['followingUid'] .",";
         }
         $allIdString = trim($allIdString,',');
-        $data['followingMessage'] = $this->getUserMessage('uid,name,icon,sex,signature', $allIdString);
+        $data['followingMessage'] = $this->getUserMessageWithFollower('uid,name,icon,sex,signature', $allIdString, $myId);
         return $data;
         
+    }
+    
+    /*
+     *
+     *
+     */
+    public function getUserMessageWithFollower($fieldString, $idString, $myId){
+        $sql = "select f1.*,if(f2.followerUid=" .$myId. ",1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (" .$idString. ")) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=" .$myId;
+        return $userMessage = $this->db->querySql($sql);
+        //      return $userMessage = $this->db->select($fieldString)->from('def_user')->where('uid in (' . $idString . ')')->query()->fetchAll();
     }
     
     /*
@@ -77,7 +95,23 @@ class Model extends \App\Common\Model
         if($row){
             $this->db->execSql("update def_user set followingCount=followingCount+1 where uid=" . $value['fromUid']);
             $this->db->execSql("update def_user set followerCount=follower+1 where uid=" . $value['followingUid']);
+            return true;
             
+        }
+        return '';
+    }
+    
+    /*
+     * remove following
+     */
+    public function removeFollowing($value){
+        if(!is_numeric($value['fromUid']) || !is_numeric($value['followingUid']))return '';
+        $row1 = $this->db->delete()->from('def_user_relation_following')->where('fromUid=' . $value['fromUid'] . ' and followingUid=' . $value['followingUid'])->exec();
+        $row2 = $this->db->delete()->from('def_user_relation_follower')->where('fromUid=' . $value['followingUid'] . ' and followerUid=' . $value['fromUid'])->exec();
+        if($row1 && $row2){
+            $this->db->execSql("update def_user set followingCount=followingCount-1 where uid=" . $value['fromUid']);
+            $this->db->execSql("update def_user set followerCount=follower-1 where uid=" . $value['followingUid']);
+            return true;
         }
         return '';
     }

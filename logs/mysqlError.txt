@@ -14,3 +14,26 @@ Tuesday 23rd of June 2015 05:30:10 AM  select followingCount from def_user where
 Tuesday 23rd of June 2015 05:34:53 AM  select uid,name,icon,sex,signature from def_user where uid in ()
 Tuesday 23rd of June 2015 05:41:54 AM  update def_user set followerCount=follower+1 where uid=1109
 Tuesday 23rd of June 2015 05:44:06 AM  update def_user set followerCount=follower+1 where uid=1109
+Tuesday 23rd of June 2015 06:14:33 AM  update def_user set followerCount=follower+1 where uid=1109
+Tuesday 23rd of June 2015 06:14:38 AM  update def_user set followerCount=follower+1 where uid=1109
+Tuesday 23rd of June 2015 06:14:41 AM  update def_user set followerCount=follower+1 where uid=1109
+Tuesday 23rd of June 2015 07:38:28 AM  update def_user set followerCount=follower+1 where uid=1111
+Tuesday 23rd of June 2015 07:38:32 AM  update def_user set followerCount=follower+1 where uid=1111
+Tuesday 23rd of June 2015 08:57:23 AM  select uid,name,icon,sex,signature from def_user where uid in ()
+Tuesday 23rd of June 2015 11:04:32 AM  select f2.followingUid,if(f1.followerUid=1109,1,0) isFollowing 
+                from def_user_relation_follower f1 
+                right join (select fromUid,followingUid from def_user_relation_following where fromUid=1) f2 
+                on f1.fromUid=f2.followingUid 
+                and f1.followerUid=1109 
+                limit 0,
+Tuesday 23rd of June 2015 11:41:24 AM  select uid,name,icon,sex,signature from def_user where uid in ()
+Tuesday 23rd of June 2015 11:41:27 AM  select uid,name,icon,sex,signature from def_user where uid in ()
+Tuesday 23rd of June 2015 11:43:11 AM  select f1.*,f2.followerUid
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in 1107,1100,1110,1111,1112,1113) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=1109

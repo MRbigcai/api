@@ -24,7 +24,7 @@ class Control extends \App\Common\Control
         $data['common'] = $this->model->getFollowingInCommon($myId, $theOtherId);
         $page = isset($this->values['page'])?$this->values['page']:1;
         $pageSize = 10;
-        $message = $this->model->getFollowingMessage($theOtherId, $page, $pageSize);
+        $message = $this->model->getFollowingMessage($myId, $theOtherId, $page, $pageSize);
         $data['following'] = $message['followingMessage'];
         $data['followingCount'] =  $message['followingCount'];
         response(200,'success',$data);
@@ -62,6 +62,20 @@ class Control extends \App\Common\Control
         $row = $this->model->addFollowing($value);
         if($row)response(200,'success');
         
+    }
+    
+    
+    /*
+     * remove following
+     */
+    public function removeFollowing(){
+        if (empty($this->values['myId']) || empty($this->values['theOtherId']))response(400,'用户id不存在');
+        $value['fromUid'] = $this->values['myId'];
+        $value['followingUid'] = $this->values['theOtherId'];
+        $value['addTime'] = time();
+        $row = $this->model->removeFollowing($value);
+        if($row)response(200,'success');
+    
     }
     
     /*
