@@ -37,3 +37,526 @@ Tuesday 23rd of June 2015 11:43:11 AM  select f1.*,f2.followerUid
                     in 1107,1100,1110,1111,1112,1113) f1
                 on f1.uid=f2.fromUid
                 and f2.followerUid=1109
+Wednesday 24th of June 2015 08:40:47 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1107,1,0) 
+                from def_plan p inner join def_user u 
+                on p.province='����ʡ' 
+                and p.city='������' 
+                and startTime<=1435096800
+                and endTime>=1435442400 
+                and p.uid=u.uid and sex=m and age=901left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1111
+Wednesday 24th of June 2015 08:42:01 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1111,1,0) 
+                from def_plan p inner join def_user u 
+                on p.province='%B8%A3%BD%A8%CA%A1' 
+                and p.city='%CF%C3%C3%C5%CA%D0' 
+                and startTime<=1435096800
+                and endTime>=1435442400 
+                and p.uid=u.uid and sex=m and age=901left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1111
+Wednesday 24th of June 2015 08:50:09 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1112,1,0) 
+                from def_plan p inner join def_user u 
+                on p.province='����ʡ' 
+                and p.city='Ȫ����' 
+                and startTime<=1435096800
+                and endTime>=1435442400 
+                and p.uid=u.uid and sex=m and age=901left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1112
+Wednesday 24th of June 2015 08:51:57 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1109,1,0) 
+                from def_plan p inner join def_user u 
+                on p.province='����ʡ' 
+                and p.city='Ȫ����' 
+                and startTime<=1435096800
+                and endTime>=1435442400 
+                and p.uid=u.uid and sex='m' and age='901'left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1109
+Wednesday 24th of June 2015 08:53:07 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1111,1,0) 
+                from def_plan p inner join def_user u 
+                on p.province='����ʡ' 
+                and p.city='Ȫ����' 
+                and startTime<=1435096800
+                and endTime>=1435442400 
+                and p.uid=u.uid and sex='m' and age='901' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1111
+Wednesday 24th of June 2015 09:06:13 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1111,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on p.province='����ʡ' 
+                and p.city='������' 
+                and startTime<=1435096800
+                and endTime>=1435442400
+                and uid!=1111
+                and p.uid=u.uid and p.sex='m' and p.age='901' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1111
+Wednesday 24th of June 2015 10:06:29 AM  
+Wednesday 24th of June 2015 10:08:53 AM  
+Wednesday 24th of June 2015 10:10:15 AM  
+Wednesday 24th of June 2015 10:43:39 AM  select p.uid,p.startTime,p.endTime,p.province,p.city,u.icon,u.signature,if(f.followerUid=1111,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='����ʡ' 
+                and p.city='Ȫ����' 
+                and p.startTime<=1435096800
+                and p.endTime>=1435442400
+                and p.uid!=1111
+                and p.uid=u.uid and p.sex='m' and p.age='901' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1111
+Wednesday 24th of June 2015 01:02:07 PM  insert into def_user_relation_follower (fromUid,followerUid,addTime) values ('1117','1109','1435143727')
+Wednesday 24th of June 2015 01:02:09 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435143729')
+Wednesday 24th of June 2015 01:02:12 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435143732')
+Wednesday 24th of June 2015 01:02:17 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435143737')
+Wednesday 24th of June 2015 01:04:13 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435143853')
+Thursday 25th of June 2015 06:02:54 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 06:03:14 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 06:03:21 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 08:01:21 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 08:01:40 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 08:02:43 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 08:03:41 AM  select f1.*,if(f2.followerUid='',1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in (1109)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Thursday 25th of June 2015 08:35:52 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1372111200
+                and p.endTime>=1372111200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 08:35:54 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1372111200
+                and p.endTime>=1372111200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 08:35:56 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1372111200
+                and p.endTime>=1372111200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 08:35:58 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1372111200
+                and p.endTime>=1372111200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 08:51:56 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 08:51:58 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 09:12:54 AM  update def_user set followerCount=follower-1 where uid=1109
+Thursday 25th of June 2015 09:19:26 AM  insert into def_user_relation_follower (fromUid,followerUid,addTime) values ('1117','1109','1435216766')
+Thursday 25th of June 2015 09:22:13 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1109','1112','1435216933')
+Thursday 25th of June 2015 09:22:18 AM  update def_user set followerCount=follower+1 where uid=1117
+Thursday 25th of June 2015 09:23:01 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1109','1117','1435216981')
+Thursday 25th of June 2015 09:23:56 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1109','1117','1435217036')
+Thursday 25th of June 2015 09:27:41 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1109','1117','1435217261')
+Thursday 25th of June 2015 09:29:18 AM  insert into def_user_relation_follower (fromUid,followerUid,addTime) values ('1117','1109','1435217358')
+Thursday 25th of June 2015 09:29:27 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435217367')
+Thursday 25th of June 2015 09:31:40 AM  insert into def_user_relation_follower (fromUid,followerUid,addTime) values ('1117','1109','1435217500')
+Thursday 25th of June 2015 09:33:01 AM  insert into def_user_relation_follower (fromUid,followerUid,addTime) values ('1117','1109','1435217581')
+Thursday 25th of June 2015 09:33:15 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1118','1109','1435217595')
+Thursday 25th of June 2015 09:34:02 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1118','1109','1435217642')
+Thursday 25th of June 2015 09:34:13 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1118','1111','1435217653')
+Thursday 25th of June 2015 09:59:49 AM  select f1.*,if(f2.followerUid=1117,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in ()) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=1117
+Thursday 25th of June 2015 09:59:51 AM  select f1.*,if(f2.followerUid=1117,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in ()) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=1117
+Thursday 25th of June 2015 10:19:01 AM  select f1.*,if(f2.followerUid=1117,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in ()) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=1117
+Thursday 25th of June 2015 10:23:54 AM  select f1.*,if(f2.followerUid=1117,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select uid,name,icon,sex,signature
+                    from def_user
+                    where uid
+                    in ()) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=1117
+Thursday 25th of June 2015 11:09:13 AM  select followingUid from def_user_relation_following where fromUid = 1109 limit 0,
+Thursday 25th of June 2015 11:10:24 AM  select followingUid from def_user_relation_following where fromUid = 1109 limit 0,
+Thursday 25th of June 2015 11:33:40 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1109','1113','1435224820')
+Thursday 25th of June 2015 11:34:27 AM  select followerCount from def_user where uid=0 and followerUid!=1109
+Thursday 25th of June 2015 12:01:48 PM  select followerCount followingCount from def_user where uid=
+Thursday 25th of June 2015 01:43:43 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232623')
+Thursday 25th of June 2015 01:43:45 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232625')
+Thursday 25th of June 2015 01:44:23 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232662')
+Thursday 25th of June 2015 01:44:27 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232667')
+Thursday 25th of June 2015 01:44:30 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232670')
+Thursday 25th of June 2015 01:44:33 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232673')
+Thursday 25th of June 2015 01:44:36 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232676')
+Thursday 25th of June 2015 01:47:37 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232857')
+Thursday 25th of June 2015 01:48:19 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232899')
+Thursday 25th of June 2015 01:48:21 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232901')
+Thursday 25th of June 2015 01:48:24 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435232904')
+Thursday 25th of June 2015 01:50:39 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435233039')
+Thursday 25th of June 2015 01:58:41 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435233521')
+Thursday 25th of June 2015 01:58:43 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435233523')
+Thursday 25th of June 2015 01:58:45 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435233525')
+Thursday 25th of June 2015 03:15:51 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:15:53 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:19:20 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:19:27 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:19:47 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:20:52 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:21:25 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:22:30 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:25:09 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:25:20 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:25:24 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Thursday 25th of June 2015 03:25:26 PM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=1435183200
+                and p.endTime>=1435183200
+                and p.uid!=
+                and p.uid=u.uid left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=
+Friday 26th of June 2015 05:47:24 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435290444')
+Friday 26th of June 2015 05:47:33 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435290453')
+Friday 26th of June 2015 05:47:35 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1117','1109','1435290455')
+Friday 26th of June 2015 11:22:41 AM  insert into def_user (phone,pwd,sex,name) values ('13276969199','14e1b600b1fd579f47433b88e8d85291','m','oZo6R9')
+Friday 26th of June 2015 11:22:43 AM  insert into def_user (phone,pwd,sex,name) values ('13276969199','14e1b600b1fd579f47433b88e8d85291','m','RvxNUA')
+Friday 26th of June 2015 11:22:45 AM  insert into def_user (phone,pwd,sex,name) values ('13276969199','14e1b600b1fd579f47433b88e8d85291','m','xngsV')
+Monday 29th of June 2015 08:54:22 AM  select * from def_user where phone=chenjb and pwd='55aa8bec9ebc22ae3257abf3ca5b548b'
+Monday 29th of June 2015 08:56:02 AM  insert into def_user_token (token) values ('b727ddf7f32b81bdff02134122b15de1')
+Monday 29th of June 2015 09:29:37 AM  insert into def_user_token (token,uid,time,exipre) values ('cbc6425cd29e68ee4a62ad70c1d2dbf8','1100','1435562977','1435649377') on DUPLICATE KEY token='cbc6425cd29e68ee4a62ad70c1d2dbf8',uid='1100',time='1435562977',exipre='1435649377',
+Monday 29th of June 2015 09:30:48 AM  insert into def_user_token (token,uid,time,exipre) values ('82b055542c82a421793634feaa6d3d42','1100','1435563048','1435649448') on DUPLICATE KEY token='82b055542c82a421793634feaa6d3d42',uid='1100',time='1435563048',exipre='1435649448',
+Monday 29th of June 2015 09:31:11 AM  insert into def_user_token (token,uid,time,exipre) values ('52e7ed31394983cbdf394b4ccf0ac61e','1100','1435563071','1435649471') on DUPLICATE KEY token='52e7ed31394983cbdf394b4ccf0ac61e',uid='1100',time='1435563071',exipre='1435649471'
+Monday 29th of June 2015 09:31:44 AM  insert into def_user_token (token,uid,time,exipre) values ('faa281adaf674e407a75bf67be244ff4','1100','1435563104','1435649504') on DUPLICATE KEY update token='faa281adaf674e407a75bf67be244ff4',uid='1100',time='1435563104',exipre='1435649504'
+Monday 29th of June 2015 09:57:08 AM  select id
+                from def_user_token
+                where uid=1112
+                and token=d41d8cd98f00b204e9800998ecf8427e
+Monday 29th of June 2015 10:19:15 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 10:19:23 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 10:20:04 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 10:20:08 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 10:20:09 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 10:21:30 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog limit 0,10) b 
+                on b.owner=u.uid
+                order by time desc
+Monday 29th of June 2015 11:03:08 AM  select id
+                from def_user_token
+                where uid=
+                and token='d41d8cd98f00b204e9800998ecf8427e'
+                and expire>1435568588
+Monday 29th of June 2015 11:25:35 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Monday 29th of June 2015 11:33:07 AM  select b.*,u.name,u.icon 
+                from def_blog b 
+                left join def_user u 
+                on b.owner=u.uid limit 0,10
+Monday 29th of June 2015 11:57:22 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select name,icon,uid,sex,blogCount,followingCount,followerCount
+                    from def_user
+                    where uid
+                    in (1117)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Monday 29th of June 2015 11:58:10 AM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select name,icon,uid,sex,blogCount,followingCount,followerCount
+                    from def_user
+                    where uid
+                    in (1117)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Monday 29th of June 2015 12:01:28 PM  select f1.*,if(f2.followerUid=,1,0) isFollowing
+                from def_user_relation_follower f2
+                right join
+                    (select name,icon,uid,sex,blogCount,followingCount,followerCount
+                    from def_user
+                    where uid
+                    in (1117)) f1
+                on f1.uid=f2.fromUid
+                and f2.followerUid=
+Monday 29th of June 2015 12:16:27 PM  select id
+                from def_user_token
+                where uid=
+                and token='d41d8cd98f00b204e9800998ecf8427e'
+                and expire>1435572987
+Monday 29th of June 2015 12:21:39 PM  select id
+                from def_user_token
+                where uid=
+                and token='d41d8cd98f00b204e9800998ecf8427e'
+                and expire>1435573299
+Monday 29th of June 2015 12:25:15 PM  select id
+                from def_user_token
+                where uid=
+                and token='d41d8cd98f00b204e9800998ecf8427e'
+                and expire>1435573515
+Monday 29th of June 2015 12:29:32 PM  select id
+                from def_user_token
+                where uid=
+                and token='e57b16632fe5533d0392ede49f54043b'
+                and expire>1435573772
+Monday 29th of June 2015 12:31:17 PM  select id
+                from def_user_token
+                where uid=
+                and token='e57b16632fe5533d0392ede49f54043b'
+                and expire>1435573877
+Monday 29th of June 2015 12:34:16 PM  select id
+                from def_user_token
+                where uid=
+                and token='e57b16632fe5533d0392ede49f54043b'
+                and expire>1435574056
+Monday 29th of June 2015 12:36:49 PM  select id
+                from def_user_token
+                where uid=
+                and token='d41d8cd98f00b204e9800998ecf8427e'
+                and expire>1435574209
+Tuesday 30th of June 2015 03:38:53 AM  insert into def_user_token (ryToken) values ('Hk5NAWqwEhy6iVLehsunCiIJWl9AyaxDMLV8MOtZx4QKoBa2Uam5Rx5ORM+5vm/5MAclJ1TwKX1lWC1NBhCO5A==') on DUPLICATE KEY update ryToken='Hk5NAWqwEhy6iVLehsunCiIJWl9AyaxDMLV8MOtZx4QKoBa2Uam5Rx5ORM+5vm/5MAclJ1TwKX1lWC1NBhCO5A=='
+Tuesday 30th of June 2015 03:40:28 AM  insert into def_user_token (ryToken) values ('4tRz+CJKBfmO4RfI4R184wnSwtJdqkDwugyXYj1AaxjveS1OElvmV2RK6lox/PPLtlKh85pO55q9V9fes91MWw==') on DUPLICATE KEY update ryToken='4tRz+CJKBfmO4RfI4R184wnSwtJdqkDwugyXYj1AaxjveS1OElvmV2RK6lox/PPLtlKh85pO55q9V9fes91MWw=='
+Tuesday 30th of June 2015 03:42:37 AM  insert into def_user (phone,pwd,sex,name) values ('19999999999','897c8fde25c5cc5270cda61425eed3c8','m','Yk56tg')
+Tuesday 30th of June 2015 03:44:04 AM  insert into def_user (phone,pwd,sex,name) values ('19999999999','897c8fde25c5cc5270cda61425eed3c8','m','A0ZheI')
+Tuesday 30th of June 2015 06:07:52 AM  insert into def_replies (formId,toId,bid,content,time) values ('1139','1137','100','huifu','1435637272')
+Tuesday 30th of June 2015 09:25:22 AM  update def_user set ='' where uid=1139
+Tuesday 30th of June 2015 09:27:22 AM  update def_user set ='' where uid=1139

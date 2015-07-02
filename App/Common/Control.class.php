@@ -21,6 +21,21 @@ class Control
         $this->model = new $classPath;
     }
     
+    
+    /*
+     * 通过账号和token验证用户合法性
+     */
+    public function checkToken($uid){
+        $value['uid'] = $uid;
+        if(!empty($this->values['token']))
+            $value['token'] = $this->values['token'];
+        else
+            $value['token'] = '';
+        $value['time'] = time();
+        $row = $this->model->checkToken($value);
+        if(!$row)response(400,'请登录');
+    
+    }
 
 }
 

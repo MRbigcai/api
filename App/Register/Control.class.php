@@ -5,6 +5,7 @@ class Control extends \App\Common\Control
 {
     /*
      * register
+     * post value name用户名，可为空系统默认生成；pwd，sex，phone
      */
     public function register(){
         $this->values['name'] = isset($this->values['name'])?$this->values['name']:$this->getDefaultName();
@@ -19,21 +20,26 @@ class Control extends \App\Common\Control
             $rongCloudJson = $rongCloudApi->getToken($lastId, $values['name'], 'http%3A%2F%2Fabc.com%2Fmyportrait.jpg');//userId,userName,URI of photo
             $rongCloudArray = json_decode($rongCloudJson,true);
             $rongCloudToken = $rongCloudArray['token'];
-            $rows = $this->model->saveToken(array('ryToken'=>$rongCloudToken), $lastId);
+            $rows = $this->model->saveRyToken(array('ryToken'=>$rongCloudToken), $lastId);
             if($rows)response(200,'success');
         }
         return '';
     }
-    
+    /*
+     * 登录
+     * post value phone，pwd
+     */
     public function login(){
         $phone = $this->values['phone'];
         $pwd = $this->values['pwd'];
-        $this->model->login($phone, $pwd);
+        $tokenExpire =  $this->config->tokenExpire;
+        $this->model->login($phone, $pwd, $tokenExpire);
     }
     
     
     /*
      * get a default userName
+     * post value null
      * return string name;
      */
     public function getDefaultName(){

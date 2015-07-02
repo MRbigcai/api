@@ -27,12 +27,9 @@ function autoLoad($class){
  * @param array $data
  * @return string
  */
-function response($flag = 200,$retMsg = '',$data = array()){
+function response($flag = 200,$retMsg = '',$data = array('code' => '000')){
     if(!is_numeric($flag))return '';
-    if($flag != 200)$data = array(
-        'code' => $flag,
-        'type' => 'err'
-    );
+
     $result = array(
         'flag' => $flag,
         'retMsg' => $retMsg,

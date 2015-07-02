@@ -37,10 +37,11 @@ class Model extends \App\Common\Model
      * param int $pageSize
      * return followingArr
      */
-    public function getFollowingMessage($myId,$uid,$page,$pageSize){
+    public function getFollowingMessage($myId,$theOtherId,$page,$pageSize){
         $offset=$pageSize*($page-1);
-        $data['followingCount'] = $this->db->select('followingCount')->from('def_user')->where('uid=' . $uid)->query()->fetchAll();
-        $allIdArr = $this->db->select('followingUid')->from('def_user_relation_following')->where('fromUid = ' . $uid)->limit($offset, $pageSize)->query()->fetchAll();
+        $data['followingCount'] = $this->db->select('followingCount')->from('def_user')->where('uid=' . $theOtherId)->query()->fetchAll();
+        $allIdArr = $this->db->select('followingUid')->from('def_user_relation_following')->where('fromUid = ' . $theOtherId . ' and followingUid!='. $myId)->limit($offset, $pageSize)->query()->fetchAll();
+        if(empty($allIdArr))response(200,'空');
         $allIdString = '';
         foreach ($allIdArr as $key => $value){
             $allIdString .= $value['followingUid'] .",";
@@ -59,7 +60,7 @@ class Model extends \App\Common\Model
         $sql = "select f1.*,if(f2.followerUid=" .$myId. ",1,0) isFollowing
                 from def_user_relation_follower f2
                 right join
-                    (select uid,name,icon,sex,signature
+                    (select " .$fieldString. "
                     from def_user
                     where uid
                     in (" .$idString. ")) f1
@@ -76,8 +77,19 @@ class Model extends \App\Common\Model
      * 
      */
     
-    public function getFollowerMessage(){
-        
+    public function getFollowerMessage($myId,$theOtherId,$page,$pageSize){
+        $offset=$pageSize*($page-1);
+        //followerCount别名成followingCount只是为了方便，前端思源提的需求，扁他
+        $data['followerCount'] = $this->db->select('followerCount followingCount')->from('def_user')->where('uid=' . $theOtherId)->query()->fetchAll();
+        $allIdArr = $this->db->select('followerUid')->from('def_user_relation_follower')->where('fromUid = ' . $theOtherId . " and followerUid!=" .$myId)->limit($offset, $pageSize)->query()->fetchAll();
+        if(empty($allIdArr))response(200,'暂无粉丝');
+        $allIdString = '';
+        foreach ($allIdArr as $key => $value){
+            $allIdString .= $value['followerUid'] .",";
+        }
+        $allIdString = trim($allIdString,',');
+        $data['followerMessage'] = $this->getUserMessageWithFollower('uid,name,icon,sex,signature', $allIdString, $myId);
+        return $data;
         
     }
     
@@ -87,14 +99,14 @@ class Model extends \App\Common\Model
      */
     public function addFollowing($value){
         if(!is_numeric($value['fromUid']) || !is_numeric($value['followingUid']))return '';
-        $row = $this->db->insert('def_user_relation_following', $value)->exec();
-        $values['fromUid'] = $value['fromUid'];
-        $values['followerUid'] = $value['followingUid'];
+        $row1 = $this->db->insert('def_user_relation_following', $value)->exec();
+        $values['fromUid'] = $value['followingUid'];
+        $values['followerUid'] = $value['fromUid'];
         $values['addTime'] = $value['addTime'];
-        $row = $this->db->insert('def_user_relation_follower', $values)->exec();
-        if($row){
+        $row2 = $this->db->insert('def_user_relation_follower', $values)->exec();
+        if($row1 && $row2){
             $this->db->execSql("update def_user set followingCount=followingCount+1 where uid=" . $value['fromUid']);
-            $this->db->execSql("update def_user set followerCount=follower+1 where uid=" . $value['followingUid']);
+            $this->db->execSql("update def_user set followerCount=followerCount+1 where uid=" . $value['followingUid']);
             return true;
             
         }
@@ -109,8 +121,8 @@ class Model extends \App\Common\Model
         $row1 = $this->db->delete()->from('def_user_relation_following')->where('fromUid=' . $value['fromUid'] . ' and followingUid=' . $value['followingUid'])->exec();
         $row2 = $this->db->delete()->from('def_user_relation_follower')->where('fromUid=' . $value['followingUid'] . ' and followerUid=' . $value['fromUid'])->exec();
         if($row1 && $row2){
-            $this->db->execSql("update def_user set followingCount=followingCount-1 where uid=" . $value['fromUid']);
-            $this->db->execSql("update def_user set followerCount=follower-1 where uid=" . $value['followingUid']);
+            $this->db->execSql("update def_user set followingCount=followingCount-1 where uid=" . $value['fromUid']. " and followingCount>0");
+            $this->db->execSql("update def_user set followerCount=followerCount-1 where uid=" . $value['followingUid']. " and followerCount>0");
             return true;
         }
         return '';

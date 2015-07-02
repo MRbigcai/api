@@ -80,7 +80,7 @@ class DbControl
      */
     public function query(){
         try{
-            $this->dbh->query("set names utf8");
+            $this->dbh->exec("set names utf8");
             $this->sth = $this->dbh->query($this->sql);
         }catch(\PDOException $e){
             file_put_contents(BASEDIR . SEPARATOR . "logs" .SEPARATOR . "mysqlError.txt", date("l dS \\of F Y h:i:s A") . "  " . $this->sql . "\r\n", FILE_APPEND);
@@ -119,7 +119,7 @@ class DbControl
      */
     public function exec(){
         try{
-            $this->dbh->query("set names utf8");
+            $this->dbh->exec("set names utf8");
             $this->rows = $this->dbh->exec($this->sql);
             $this->sql = '';
         }catch(\PDOException $e){
@@ -152,6 +152,18 @@ class DbControl
         return $this;
     }
     
+    /*
+     * 存在则更新，不存在则插入
+     */
+    public function duplicate($fieldArr){
+        $fieldAll = '';
+        foreach ($fieldArr as $key => $value){
+            $fieldAll .= $key . "='" . $value . "',";
+        }
+        $this->sql .= " on DUPLICATE KEY update " . rtrim($fieldAll,",");
+        return $this;
+        
+    }
     /*
      * update the field
      * param array

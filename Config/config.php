@@ -15,3 +15,8 @@ $config->statusCode = array(
     'loginErr' => 403,
     'success' => 200
 );
+
+$config->memArray = array(
+    'host' => '192.168.128.128',
+    'poort' => 11211
+);
