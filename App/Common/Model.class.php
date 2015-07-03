@@ -28,8 +28,9 @@ class Model
         $offset=$pageSize*($page-1);
         $sql = "select b.*,u.name,u.icon 
                 from def_blog b 
-                left join def_user u 
-                on b.uid=u.uid limit " .$offset. "," .$pageSize;
+                inner join def_user u 
+                on b.uid=".$uid."
+                and b.uid=u.uid limit " .$offset. "," .$pageSize;
  /*       $sql = "select b.*,u.icon,u.name
                 from def_user u
                 right join
@@ -69,6 +70,19 @@ class Model
     
     
     
+    }
+    /*
+     * 查询是否关注
+     * 
+     */
+    public function checkIfFollowing($myId,$theOtherId){
+       $sql = "select 1 
+               from def_user_relation_following
+               where fromUid=" .$myId. "
+               and followingUid=" .$theOtherId;
+       $result = $this->db->querySql($sql);
+       return $result;
+        
     }
 }
 

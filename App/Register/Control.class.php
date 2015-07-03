@@ -23,7 +23,7 @@ class Control extends \App\Common\Control
             $rows = $this->model->saveRyToken(array('ryToken'=>$rongCloudToken), $lastId);
             if($rows)response(200,'success');
         }
-        return '';
+        response(400,'fail');
     }
     /*
      * 登录

@@ -12,7 +12,7 @@ class Control extends \App\Common\Control
         $this->checkToken($myId);
         //save the photo
         $name = \Lib\PhotoUtility::savePhotoWithClientData(BASEDIR. SEPARATOR .'Resources' . SEPARATOR . 'blog' . SEPARATOR,$this->values['pic']);
-        $this->values['pic'] = "http://" . $_SERVER['HTTP_HOST'] . "/Resources/blog/" . $name;
+        $this->values['pic'] = "http://" . $_SERVER['HTTP_HOST'] . "/Resources/blog/0.3-" .$name;
         //require the table field
         foreach ($this->config->insertField as $k => $v){
                 $values[$v] = !empty($this->values[$v])?$this->values[$v]:'';
@@ -46,12 +46,11 @@ class Control extends \App\Common\Control
         $values['time'] =  time();
         $row = $this->model->insertPlan($values);
         if($row){
-            $data = $this->model->getPlanInCommon($values);
+            $data['data'] = $this->model->getPlanInCommon($values);
             if($data)response(200,'success',$data);
-            else response(200, "success", array());
+            else response(200, "success");
         }
-        return '';
-    
+        response(400, "fail");
     }
 }
 

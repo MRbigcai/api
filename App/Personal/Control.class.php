@@ -31,9 +31,10 @@ class Control extends \App\Common\Control
             $data['following'] = $message['followingMessage'];
             $data['followingCount'] =  $message['followingCount'];
         }else{
-            response(400,'error who');
+            response(400,'error who',array('error'=>'who'));
         }
-        response(200,'success',$data);
+        if(!empty($data))response(200,'success',$data);
+        response(200,'success');
     
     }
     
@@ -62,9 +63,10 @@ class Control extends \App\Common\Control
             $data['following'] = $message['followerMessage'];
             $data['followingCount'] =  $message['followerCount'];
         }else{
-            response(400,'error who');
+            response(400,'error who',array('error'=>'who'));
         }
-        response(200,'success',$data);
+        if(!empty($data))response(200,'success',$data);
+        response(200,'success');
     }
     
     
@@ -77,7 +79,7 @@ class Control extends \App\Common\Control
     public function personalHomePage(){
         $page = isset($this->values['page'])?$this->values['page']:1;
         $pageSize = 10;
-        $userFieldString = "name,icon,uid,sex,blogCount,followingCount,followerCount";
+        $userFieldString = "name,icon,uid,sex,blogCount,followingCount,followerCount,background";
         $myId = isset($this->values['myId'])?$this->values['myId']:0;
         $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
  //       $blogFieldString = "`id`,`content`,`pic`,`comment`,`likes`,`pic_high`,`pic_width`,`longtitude`,`latitude`";
@@ -90,10 +92,11 @@ class Control extends \App\Common\Control
             $data['userMess'] = $this->model->getUserMessage($userFieldString, $myId);
             $data['blogMess'] = $this->model->getblogByUid($myId, $page, $pageSize);
         }else{
-            response(400,'请选择是个人主页还是他人主页');
+            response(400,'请选择是个人主页还是他人主页',array('error'=>'who'));
         }
 
-        response(200,'success',$data);
+        if(!empty($data))response(200,'success',$data);
+        response(200,'success');
         
     }
     
@@ -110,6 +113,7 @@ class Control extends \App\Common\Control
         $value['addTime'] = time();
         $row = $this->model->addFollowing($value);
         if($row)response(200,'success');
+        response(400,'添加失败');
         
     }
     
@@ -127,6 +131,7 @@ class Control extends \App\Common\Control
         $value['addTime'] = time();
         $row = $this->model->removeFollowing($value);
         if($row)response(200,'success');
+        response(400,'移除失败');
     
     }
     
@@ -144,7 +149,7 @@ class Control extends \App\Common\Control
         $value['addTime'] = time();
         $row = $this->model->addFavorite($value);
         if($row)response(200,'success');
-        return '';
+        response(400,'添加失败');;
         
     }
     
@@ -191,11 +196,26 @@ class Control extends \App\Common\Control
         $uid = isset($this->values['uid'])?$this->values['uid']:0;
         $this->checkToken($uid);
         $name = \Lib\PhotoUtility::savePhotoWithClientData(BASEDIR. SEPARATOR .'Resources' . SEPARATOR . 'userIcon' . SEPARATOR,$this->values['icon']);
-        $values['icon'] = "http://" . $_SERVER['HTTP_HOST'] . "/Resources/userIcon/" . $name;
+        $values['icon'] = "http://" . $_SERVER['HTTP_HOST'] . "/Resources/userIcon/0.6-" . $name;
         $row = $this->model->changeUserData($values, $this->values['uid']);
         if($row)response(200,'success',$values);
-        return '';
+        response(400,'更改失败');
    
+    }
+    
+    /*
+     * change the background
+     * post value:uid,pic
+     */
+    public function changeBackground(){
+        $uid = isset($this->values['uid'])?$this->values['uid']:0;
+        $this->checkToken($uid);
+        $name = \Lib\PhotoUtility::savePhotoWithClientData(BASEDIR. SEPARATOR .'Resources' . SEPARATOR . 'background' . SEPARATOR,$this->values['background']);
+        $values['background'] = "http://" . $_SERVER['HTTP_HOST'] . "/Resources/background/0.6-" . $name;
+        $row = $this->model->changeUserData($values, $this->values['uid']);
+        if($row)response(200,'success',$values);
+        response(400,'更改失败');
+         
     }
     
     /*
@@ -204,9 +224,9 @@ class Control extends \App\Common\Control
      */
     public function getUserData(){
         $otherUid = isset($this->values['uid'])?$this->values['uid']:0;
-        $data = $this->model->getUserMessage('name,icon,sex,mail,province,city,county,birthday,signature',$otherUid);        
-        if($data)response(200,'success',$data);
-        return '';
+        $data = $this->model->getUserMessage('name,icon,sex,mail,province,city,county,birthday,signature',$otherUid);
+        if(!empty($data))response(200,'success',$data);
+        response(200,'success');
     }
     
     /*
