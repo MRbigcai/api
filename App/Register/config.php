@@ -1,11 +1,11 @@
 <?php
-$config->register = new stdClass();
-$config->register->insertField = array('phone', 'pwd', 'sex', 'name');
-$config->register->rongCloud = array(
+$config->Register = new stdClass();
+$config->Register->insertField = array('phone', 'pwd', 'sex', 'name');
+$config->Register->rongCloud = array(
     'appKey' => 'c9kqb3rdkhwfj',
     'appSecret' => 'P1duRI5hacX',
     'host' => 'api.cn.rong.io',
     'path' => '/user/getToken.json'
     
 );
-$config->register->tokenExpire = 86400;
+$config->Register->tokenExpire = 86400;

@@ -12,12 +12,17 @@ class Model extends \App\Common\Model
         $page = isset($values['page'])?$values['page']:1;
 //        $pageSize = 2;
         $offset=$pageSize*($page-1);
-        $sql = "select b.*,u.icon,u.name 
-                from def_user u 
-                right join 
-                    (select * from def_blog 
-                order by time desc) b 
-                on b.uid=u.uid
+        $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike 
+                from def_blog b 
+                left join def_user u 
+                on b.uid=u.uid 
+                left join def_favorite f 
+                on b.id=f.bid 
+                and f.uid=" .$values['myId']. " 
+                left join def_like l 
+                on l.bid=b.id 
+                and l.uid=" .$values['myId']. "
+                order by b.time desc
                 limit " .$offset. "," .$pageSize;
         $data = $this->db->querySql($sql);
         return $data;
@@ -57,8 +62,10 @@ class Model extends \App\Common\Model
      *
      */
     public function getReplies($bid){
-        return $result = $this->db->querySql("select r.*,d.name fromName,u.name toName from def_replies r inner join def_user d on r.bid=" .$bid. " and r.fromid=d.uid left join def_user u on r.toid=u.uid");
+        return $result = $this->db->querySql("select r.*,d.name fromName,d.icon fromIcon,u.name toName from def_replies r inner join def_user d on r.bid=" .$bid. " and r.fromId=d.uid left join def_user u on r.toId=u.uid");
     }
+    
+
 }
 
 ?>

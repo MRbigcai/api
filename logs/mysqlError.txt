@@ -560,3 +560,114 @@ Tuesday 30th of June 2015 03:44:04 AM  insert into def_user (phone,pwd,sex,name)
 Tuesday 30th of June 2015 06:07:52 AM  insert into def_replies (formId,toId,bid,content,time) values ('1139','1137','100','huifu','1435637272')
 Tuesday 30th of June 2015 09:25:22 AM  update def_user set ='' where uid=1139
 Tuesday 30th of June 2015 09:27:22 AM  update def_user set ='' where uid=1139
+Thursday 02nd of July 2015 12:29:51 PM  select u.uid,u.name,u.icon,u.sex 
+                from def_user u 
+                inner join def_user_relation_following r 
+                on r.formId=1146 
+                and u.uid=r.followingId
+                and name='�Ǻ�'
+Thursday 02nd of July 2015 12:30:02 PM  select u.uid,u.name,u.icon,u.sex 
+                from def_user u 
+                inner join def_user_relation_following r 
+                on r.fromId=1146 
+                and u.uid=r.followingId
+                and name='�Ǻ�'
+Thursday 02nd of July 2015 05:06:47 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1142','1435849607')
+Thursday 02nd of July 2015 05:06:49 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1142','1435849609')
+Thursday 02nd of July 2015 05:06:53 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1142','1435849613')
+Thursday 02nd of July 2015 05:06:55 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1142','1435849615')
+Thursday 02nd of July 2015 05:07:04 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1144','1435849624')
+Thursday 02nd of July 2015 05:07:14 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1145','1138','1435849634')
+Friday 03rd of July 2015 05:06:45 AM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1162','1145','1435892805')
+Friday 03rd of July 2015 07:44:14 AM  select *,count(*) counts 
+                from def_plan 
+                group by city ,province 
+                order by c desc 
+                limit 0,10
+Friday 03rd of July 2015 07:44:56 AM  select *,count(*) counts 
+                from def_plan 
+                group by city ,province 
+                order by c desc 
+                limit 0,10
+Friday 03rd of July 2015 09:53:13 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:54:36 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:54:43 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:54:48 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:54:56 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:55:07 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 09:56:40 AM  select b.*,u.icon,u.name 
+                from def_user u 
+                right join 
+                    (select * from def_blog 
+                order by time desc) b 
+                on b.uid=u.uid
+                limit 0,
+Friday 03rd of July 2015 11:01:07 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=1137,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='福州市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=1137
+                and p.uid=u.uid and p.sex='mf' and p.age='000' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1137
+Friday 03rd of July 2015 11:03:24 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=1137,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=1137
+                and p.uid=u.uid and p.sex='mf' and p.age='000' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1137
+Friday 03rd of July 2015 11:10:18 AM  select p.uid,u.icon,u.signature,u.name,if(f.followerUid=1137,1,0) isFollowing 
+                from def_plan p inner join def_user u 
+                on  p.province='福建省' 
+                and p.city='厦门市' 
+                and p.startTime<=
+                and p.endTime>=
+                and p.uid!=1137
+                and p.uid=u.uid and p.sex='mf' and p.age='000' left join def_user_relation_follower f 
+                 on f.fromUid=p.uid 
+                 and f.followerUid=1137
+Monday 06th of July 2015 03:50:22 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1139','1164','1436169022')
+Monday 06th of July 2015 04:51:43 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1137','1137','1436172703')
+Monday 06th of July 2015 11:59:54 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1162','1166','1436198394')

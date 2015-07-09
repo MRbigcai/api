@@ -8,7 +8,9 @@ class Control extends \App\Common\Control
      * post value: page
      */
     public function getBlogs(){
-        $data = $this->model->getBlogs($this->values, $this->config->pageSize);
+        $values = $this->values;
+        $values['myId'] = isset($this->values['myId'])?$this->values['myId']:0;
+        $data = $this->model->getBlogs($values, $this->config->pageSize);
         if(!empty($data)){
             response(200,'success',$data);            
         }
@@ -22,7 +24,7 @@ class Control extends \App\Common\Control
     public function comment(){
         $uid = isset($this->values['uid'])?$this->values['uid']:0;
         $bid = isset($this->values['bid'])?$this->values['bid']:0;
-        if(empty($this->values['content']))response(400,'内容不能为空哦');
+        if(empty($this->values['content']))response(400,'内容为空');
         $values['content'] = $this->values['content'];
         $this->checkToken($uid);
         $values['uid'] = $uid;
@@ -79,12 +81,13 @@ class Control extends \App\Common\Control
         $myId = isset($this->values['myId'])?$this->values['myId']:response(400,'myId is error');
         $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:response(400,'theOtherId is error');
         $data = $this->model->checkIfFollowing($myId,$theOtherId);
-        if($data)response(200,'已经关注',array('data'=>1));
+        if($data)response(200,'已关注',array('data'=>1));
         response(200,'未关注',array('data'=>0));
         
         
         
     }
+
 }
 
 ?>

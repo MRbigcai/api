@@ -52,6 +52,31 @@ class Control extends \App\Common\Control
         }
         response(400, "fail");
     }
+    
+    /*
+     * 按历史记录来查询计划
+     */
+    public function getPlan(){
+        $myId = $this->values['uid'];
+        $this->checkToken($myId);
+        if(empty($this->values['province']) || empty($this->values['city']))response(400, '省市不能为空');
+        if(empty($this->values['startTime']) || empty($this->values['endTime']))response(400, '时间不能为空');
+        $values = array();
+        $keyArr = array('startTime','endTime','province','city','county','location','sex','age','uid');
+        //80前-800，80后-801，90后-901，00后-001，不限-0
+        foreach ($keyArr as $k => $v){
+            if(!empty($this->values[$v])){
+                if($v == 'startTime' || $v == 'endTime')
+                    $values[$v] = strtotime($this->values[$v]);
+                else
+                    $values[$v] = $this->values[$v];
+            }
+        }
+        $values['time'] =  time();
+        $data['data'] = $this->model->getPlanInCommon($values);
+        if($data)response(200,'success',$data);
+        else response(200, "success");
+    }
 }
 
 ?>

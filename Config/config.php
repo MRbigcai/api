@@ -3,8 +3,8 @@ $config = new stdClass();
 //param for databases
 $config->dbArray = array(
     'host' => 'localhost',
-    'user' => 'root',
-    'password' => '',
+    'user' => 'cjb',
+    'password' => '10086',
     'database' => 'mosaic_db'
  );
  

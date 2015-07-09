@@ -8,7 +8,8 @@ spl_autoload_register('autoLoad');
  * 
  */
 function autoLoad($class){
-    
+
+    $class = str_replace("\\",SEPARATOR,$class);
     include_once(BASEDIR. SEPARATOR. $class. ".class.php");
     
 } 
@@ -27,7 +28,7 @@ function autoLoad($class){
  * @param array $data
  * @return string
  */
-function response($flag = 200,$retMsg = '',$data = array('code' => '000')){
+function response($flag = 200,$retMsg = '',$data = array('result'=>'empty')){
     if(!is_numeric($flag))return '';
 
     $result = array(

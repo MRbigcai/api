@@ -16,8 +16,8 @@ include_once BASEDIR. SEPARATOR. "Config". SEPARATOR. "config.php";
 $db = \Lib\DbControl::getInstance();
 $db->connect($config->dbArray['host'], $config->dbArray['user'], $config->dbArray['password'], $config->dbArray['database']);
 //初始化memcache
-$mem = new \Memcache();
-$mem->connect('192.168.128.128',11211);
+/*$mem = new \Memcache();
+$mem->connect('192.168.128.128',11211);*/
 //读取请求的模块和方法
 if(empty($_POST['method']) || empty($_POST['module'])){
     file_put_contents(BASEDIR . SEPARATOR . "logs" .SEPARATOR . "mes.txt", date("l dS \\of F Y h:i:s A") . " 请检查调用的模块或者方法是否正确,key是否大小写 method:" . $_POST['method']." module: ".$_POST['module'] . "\r\n", FILE_APPEND);
@@ -26,10 +26,10 @@ if(empty($_POST['method']) || empty($_POST['module'])){
 
 $postValues = $_POST;
 unset($_POST);
-$module = ucfirst(strtolower($postValues['module']));
+$module = $postValues['module'] = ucfirst(strtolower($postValues['module']));
 $method = $postValues['method'];
 //开启session
 /*$sess = new Lib\Session;
 session_start();*/
 //启动路由
-Lib\Route::index($module, $method);
+\Lib\Route::index($module, $method);

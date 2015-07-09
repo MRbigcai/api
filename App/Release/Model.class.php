@@ -9,7 +9,8 @@ class Model extends \App\Common\Model
      */
     public function insertBlogs($values){
         $row = $this->db->insert('def_blog', $values)->exec();
-        if($row)return $row;
+        if($row)$this->db->execSql("update def_user set blogCount=blogCount+1 where uid=" . $values['uid']);
+	return $row;
     }
     
     /*添加出行计划
