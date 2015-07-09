@@ -142,17 +142,86 @@ class Control extends \App\Common\Control
      */
     public function addFavorite(){
         $myId = isset($this->values['myId'])?$this->values['myId']:0;
-        $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
-        $this->checkToken($this->values['myId'], $this->values['token']);
+//        $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
+        $this->checkToken($myId);
         $value['uid'] = $this->values['myId'];
         $value['bid'] = $this->values['bid'];
         $value['addTime'] = time();
         $row = $this->model->addFavorite($value);
         if($row)response(200,'success');
-        response(400,'添加失败');;
+        response(400,'添加失败');
         
     }
-    
+
+
+/*
+     * 删除收藏
+     * post value int myId,bid
+     * 
+     */
+    public function removeFavorite(){
+        $myId = isset($this->values['myId'])?$this->values['myId']:0;
+        $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
+        $this->checkToken($myId);
+        $value['uid'] = $this->values['myId'];
+        $value['bid'] = $this->values['bid'];
+        $value['addTime'] = time();
+        $row = $this->model->removeFavorite($value);
+        if($row)response(200,'success');
+        response(400,'添加失败');
+        
+    }
+     /*
+     * 获取收藏列表
+     * post value:bid
+     * 
+     */
+    public function getFavoriteList(){
+        $myId = isset($this->values['myId'])?$this->values['myId']:0;
+        $this->checkToken($myId);
+	    $data['result'] = $this->model->getFavoriteList($myId);
+	    if(!empty($data))response(200,'success',$data);
+        response(200,'success');
+       
+        
+    }
+ /*
+     * 点赞博文
+     * post value int myId,bid
+     * 
+     */
+    public function addLike(){
+        $myId = isset($this->values['myId'])?$this->values['myId']:0;
+//        $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
+        $this->checkToken($myId);
+        $value['uid'] = $this->values['myId'];
+        $value['bid'] = $this->values['bid'];
+        $value['addTime'] = time();
+        $row = $this->model->addLike($value);
+        if($row)response(200,'success');
+        response(400,'添加失败');
+        
+    }
+
+
+/*
+     * 取消点赞
+     * post value int myId,bid
+     * 
+     */
+    public function removeLike(){
+        $myId = isset($this->values['myId'])?$this->values['myId']:0;
+//        $theOtherId = isset($this->values['theOtherId'])?$this->values['theOtherId']:0;
+        $this->checkToken($myId);
+        $value['uid'] = $this->values['myId'];
+        $value['bid'] = $this->values['bid'];
+        $value['addTime'] = time();
+        $row = $this->model->removeLike($value);
+        if($row)response(200,'success');
+        response(400,'添加失败');
+        
+    }
+
     /*
      * reset pwd by phone
      * post value:phone 

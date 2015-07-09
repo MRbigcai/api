@@ -66,6 +66,12 @@ class Model extends \App\Common\Model
                     in (" .$idString. ")) f1
                 on f1.uid=f2.fromUid
                 and f2.followerUid=" .$myId;
+/*echo	$sql = "select f1.name,f1.icon,f1.uid,f1.sex,f1.blogCount,f1.followingCount,f1.followerCount,f1.background,if(f2.followerUid=1139,1,0) isFollowing 
+                from def_user f1 
+                inner join def_user_relation_follower f2
+                on f1.uid in (" .$idString. ") 
+                and f1.uid=f2.fromUid 
+                and f2.followerUid=" .$myId;*/
         return $userMessage = $this->db->querySql($sql);
         //      return $userMessage = $this->db->select($fieldString)->from('def_user')->where('uid in (' . $idString . ')')->query()->fetchAll();
     }
@@ -142,7 +148,44 @@ class Model extends \App\Common\Model
         return '';
         
     }
+
+    /*
+     * 取消收藏
+     */
+    public function removeFavorite($value){
+        $row = $this->db->delete()->from('def_favorite')->where('uid=' . $value['uid'] . ' and bid=' . $value['bid'])->exec();
+        if($row){
+            $this->db->execSql("update def_favorite set favoriteCount=favoriteCount-1 where uid=" . $value['uid']. " and favoriteCount>0");
+            return true;
+        }
+        return '';
+    }
     
+/*
+     * 点赞博文
+     * param array valueArr
+     * return int row
+     */
+    public function addLike($valueArr){
+        $row = $this->db->insert('def_like', $valueArr)->exec();
+        if($row){
+            $row = $this->db->execSql("update def_blog set likes=likes+1 where id=" . $valueArr['bid']);
+            if($row)return $row;
+        }
+        return '';
+        
+    }
+/*
+     * 取消点赞
+     */
+    public function removeLike($value){
+        $row = $this->db->delete()->from('def_like')->where('uid=' . $value['uid'] . ' and bid=' . $value['bid'])->exec();
+        if($row){
+            $this->db->execSql("update def_blog set likes=likes-1 where uid=" . $value['uid']. " and likes>0");
+            return true;
+        }
+        return '';
+    }
     
     /*
      * reset pwd
