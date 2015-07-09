@@ -221,7 +221,19 @@ class Control extends \App\Common\Control
         response(400,'添加失败');
         
     }
-
+    /*
+     * 获取博文下点赞用户
+     * post value:bid
+     *
+     */
+    public function getLikeUsers(){
+        $bid = isset($this->values['bid'])?$this->values['bid']:0;
+        $data['result'] = $this->model->getLikeUsers($bid);
+        if(!empty($data))response(200,'success',$data);
+        response(200,'success');
+         
+    
+    }
     /*
      * reset pwd by phone
      * post value:phone 

@@ -160,6 +160,18 @@ class Model extends \App\Common\Model
         }
         return '';
     }
+    /*
+     * get the favorite of a blog
+     *
+     */
+    public function getFavoriteList($uid){
+        $sql = "select b.* from def_blog b
+                inner join def_favorite f
+                on f.uid=" .$uid. "
+                and f.bid=b.id
+                order by b.province,b.city";
+        return $result = $this->db->querySql($sql);
+    }
     
 /*
      * 点赞博文
@@ -186,7 +198,18 @@ class Model extends \App\Common\Model
         }
         return '';
     }
-    
+    /*
+     * get the favorite of a blog
+     *
+     */
+    public function getLikeUsers($bid){
+        $sql = "select u.uid,u.icon 
+                from def_user u
+                inner join def_like l
+                on l.bid=" .$bid. "
+                and l.uid=u.uid";
+        return $result = $this->db->querySql($sql);
+    }
     /*
      * reset pwd
      */
