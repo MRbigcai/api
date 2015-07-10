@@ -12,16 +12,19 @@ class Model extends \App\Common\Model
         $page = isset($values['page'])?$values['page']:1;
 //        $pageSize = 2;
         $offset=$pageSize*($page-1);
-        $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike 
+        $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike,if(r.fromUid=" .$values['myId']. ",1,0) ifFollowing 
                 from def_blog b 
                 left join def_user u 
                 on b.uid=u.uid 
                 left join def_favorite f 
-                on b.id=f.bid 
-                and f.uid=" .$values['myId']. " 
+                on f.uid=" .$values['myId']. " 
+                and b.id=f.bid
                 left join def_like l 
-                on l.bid=b.id 
-                and l.uid=" .$values['myId']. "
+                on l.uid=" .$values['myId']. " 
+                and l.bid=b.id
+                left join def_user_relation_following r 
+                on r.fromUid=" .$values['myId']. " 
+                and r.followingUid=b.uid
                 order by b.time desc
                 limit " .$offset. "," .$pageSize;
         $data = $this->db->querySql($sql);
