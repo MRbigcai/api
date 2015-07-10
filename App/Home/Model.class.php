@@ -68,6 +68,7 @@ class Model extends \App\Common\Model
         return $result = $this->db->querySql("select r.*,d.name fromName,d.icon fromIcon,u.name toName from def_replies r inner join def_user d on r.bid=" .$bid. " and r.fromId=d.uid left join def_user u on r.toId=u.uid");
     }
     
+    
 
 }
 

@@ -349,7 +349,7 @@ class Control extends \App\Common\Control
         
         
     }
-    
+   
     /*
      * 获取收藏状态
      * post value:myId,bid

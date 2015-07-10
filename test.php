@@ -7,7 +7,7 @@ $percent = 0.1;
 header('Content-Type: image/jpeg');
 
 // 获取新的尺寸
-list($width, $height) = getimagesize($filename);
+list ($width, $height) = getimagesize($filename);
 $new_width = $width * $percent;
 $new_height = $height * $percent;
 
@@ -18,4 +18,5 @@ imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width
 
 // 输出
 imagejpeg($image_p, null, 100);
+
 ?>

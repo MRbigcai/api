@@ -671,3 +671,13 @@ Friday 03rd of July 2015 11:10:18 AM  select p.uid,u.icon,u.signature,u.name,if(
 Monday 06th of July 2015 03:50:22 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1139','1164','1436169022')
 Monday 06th of July 2015 04:51:43 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1137','1137','1436172703')
 Monday 06th of July 2015 11:59:54 PM  insert into def_user_relation_following (fromUid,followingUid,addTime) values ('1162','1166','1436198394')
+Friday 10th of July 2015 09:14:04 AM  select id
+                from def_user_token
+                where uid=
+                and token='21ed82bd93d37bd4f1e19cfcd117cc81'
+                and expire>1436512444
+Friday 10th of July 2015 09:54:17 AM  select id
+                from def_user_token
+                where uid=
+                and token='4ae69f4b1c732dc7010ee61c26996349'
+                and expire>1436514857
