@@ -155,7 +155,7 @@ class Model extends \App\Common\Model
     public function removeFavorite($value){
         $row = $this->db->delete()->from('def_favorite')->where('uid=' . $value['uid'] . ' and bid=' . $value['bid'])->exec();
         if($row){
-            $this->db->execSql("update def_favorite set favoriteCount=favoriteCount-1 where uid=" . $value['uid']. " and favoriteCount>0");
+            $this->db->execSql("update def_user set favoriteCount=favoriteCount-1 where uid=" . $value['uid']. " and favoriteCount>0");
             return true;
         }
         return '';
@@ -224,6 +224,20 @@ class Model extends \App\Common\Model
      */
     public function changeUserData($valuesArr, $uid){
         return $this->db->update('def_user', $valuesArr)->where('uid=' . $uid)->exec();
+    }
+    
+    
+    /*
+     * 获取收藏状态
+     * post value:myId,bid
+     */
+    public function getFavoriteStatus($myId,$bid){
+        $sql = "select 1 from def_favorite
+                where uid=" .$myId. "
+                and bid=" .$bid;
+        $result = $this->db->querySql($sql);
+        return $result;
+    
     }
     
 

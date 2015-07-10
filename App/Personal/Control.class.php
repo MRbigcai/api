@@ -349,6 +349,19 @@ class Control extends \App\Common\Control
         
         
     }
+    
+    /*
+     * 获取收藏状态
+     * post value:myId,bid
+     */
+    public function getFavoriteStatus(){
+        $myId = isset($this->values['myId'])?$this->values['myId']:0;
+        $this->checkToken($myId);
+        $bid = isset($this->values['bid'])?$this->values['bid']:0;
+        $data = $this->model->getFavoriteStatus($myId,$bid);
+        if($data)response(200,'success',array('result'=>1));
+        response(200,'success',array('result'=>0));
+    }
 
 }
 
