@@ -66,8 +66,8 @@ class Model
                 where uid=".$value['uid']."
                 and token='".md5($value['token'])."'
                 and expire>".time();
-        $reslut = $this->db->querySql($sql);
-        if(!empty($reslut[0]['id']) && is_numeric($reslut[0]['id']))return $reslut[0]['id'];
+        $result = $this->db->querySql($sql);
+        if(!empty($result[0]['id']) && is_numeric($result[0]['id']))return $result[0]['id'];
         return '';
     
     

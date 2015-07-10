@@ -25,8 +25,8 @@ class Control
     /*
      * 通过账号和token验证用户合法性
      */
-    public function checkToken($uid = 0){
-        $value['uid'] = !empty($uid)?$uid:$this->values['uid'];
+    public function checkToken($uid){
+        $value['uid'] = $uid;
         if(!empty($this->values['token']))
             $value['token'] = $this->values['token'];
         else
