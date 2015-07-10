@@ -87,6 +87,22 @@ class Control extends \App\Common\Control
         
         
     }
+    
+    /*
+     * 验证是否登录或者token是否过期的单独接口，用于广告部分
+     */
+    public function checkTokenApi(){
+        $value['uid'] = isset($this->values['uid'])?$this->values['uid']:0;
+        if(!empty($this->values['token']))
+            $value['token'] = $this->values['token'];
+        else
+            $value['token'] = '';
+        $value['time'] = time();
+        $row = $this->model->checkToken($value);
+        if($row)response(200,'已登录');
+        response(400,'未登录');
+    
+    }
 
 }
 
