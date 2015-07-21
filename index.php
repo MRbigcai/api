@@ -31,5 +31,5 @@ $method = $postValues['method'];
 //开启session
 /*$sess = new Lib\Session;
 session_start();*/
-//启动路由
+//启动路由,Route貌似就是工厂模式类
 \Lib\Route::index($module, $method);

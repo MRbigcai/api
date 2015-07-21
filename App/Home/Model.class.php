@@ -25,7 +25,7 @@ class Model extends \App\Common\Model
                 left join def_user_relation_following r 
                 on r.fromUid=" .$values['myId']. " 
                 and r.followingUid=b.uid
-                order by b.time desc
+                order by b.id desc
                 limit " .$offset. "," .$pageSize;
         $data = $this->db->querySql($sql);
         return $data;

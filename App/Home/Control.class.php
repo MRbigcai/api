@@ -10,7 +10,7 @@ class Control extends \App\Common\Control
     public function getBlogs(){
         $values = $this->values;
         $values['myId'] = isset($this->values['myId'])?$this->values['myId']:0;
-        $data = $this->model->getBlogs($values, $this->config->pageSize);
+        $data['result'] = $this->model->getBlogs($values, $this->config->pageSize);
         if(!empty($data)){
             response(200,'success',$data);            
         }

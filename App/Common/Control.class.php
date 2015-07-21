@@ -33,7 +33,7 @@ class Control
             $value['token'] = '';
         $value['time'] = time();
         $row = $this->model->checkToken($value);
-        if(!$row)response(400,'请登录');
+        if(!$row)response(430,'请登录');
     
     }
 
