@@ -90,6 +90,75 @@ class Model extends \App\Common\Model
         $result = $this->db->querySql($sql);
         return $result;
     }
+    
+    
+
+    /*
+     * 搜索
+     */
+    public function search($values){
+        //如果为全部，则blogType不应该作为判断条件
+        if($values['blogType'] != 0)$sqlBlogType = " and b.blogType=" .$values['blogType'];
+        else $sqlBlogType = "";
+        if($values['type'] == 'all'){
+            $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike,if(r.fromUid=" .$values['myId']. ",1,0) ifFollowing 
+                from def_blog b 
+                inner join def_user u 
+                on b.city='" .$values['city']. "'" .$sqlBlogType. "
+                and content like '%" .$values['content']. "%'
+                and b.uid=u.uid 
+                left join def_favorite f 
+                on f.uid=" .$values['myId']. " 
+                and b.id=f.bid
+                left join def_like l 
+                on l.uid=" .$values['myId']. " 
+                and l.bid=b.id
+                left join def_user_relation_following r 
+                on r.fromUid=" .$values['myId']. " 
+                and r.followingUid=b.uid
+                order by b.id desc
+                limit 0,10";
+        }elseif ($values['type'] == 'hot'){
+            $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike,if(r.fromUid=" .$values['myId']. ",1,0) ifFollowing
+                from def_blog b
+                inner join def_user u
+                on b.city='" .$values['city']. "'" .$sqlBlogType. "
+                and content like '%" .$values['content']. "%'
+                and b.uid=u.uid
+                left join def_favorite f
+                on f.uid=" .$values['myId']. "
+                and b.id=f.bid
+                left join def_like l
+                on l.uid=" .$values['myId']. "
+                and l.bid=b.id
+                left join def_user_relation_following r
+                on r.fromUid=" .$values['myId']. "
+                and r.followingUid=b.uid
+                order by b.likes,b.id desc
+                limit 0,10";
+        }else{
+            $sql = "select b.*,u.icon,u.name,if(f.uid=" .$values['myId']. ",1,0) ifFavorite,if(l.uid=" .$values['myId']. ",1,0) ifLike,if(r.fromUid=" .$values['myId']. ",1,0) ifFollowing
+                from def_blog b
+                inner join def_user u
+                on b.city='" .$values['city']. "'" .$sqlBlogType. "
+                and content like '%" .$values['content']. "%'
+                and b.uid=u.uid
+                left join def_favorite f
+                on f.uid=" .$values['myId']. "
+                and b.id=f.bid
+                left join def_like l
+                on l.uid=" .$values['myId']. "
+                and l.bid=b.id
+                inner join def_user_relation_following r
+                on r.fromUid=" .$values['myId']. "
+                and r.followingUid=b.uid
+                order by b.id desc
+                limit 0,10";
+            
+        }
+        $result = $this->db->querySql($sql);
+        return $result;
+    }
 }
 
 ?>

@@ -75,6 +75,21 @@ class Control extends \App\Common\Control
         
         
     }
+    
+    /*
+     * 搜索
+     * post myId,content,city,type,blogType
+     */
+    public function search(){
+        $values['myId'] = isset($this->values['myId'])?$this->values['myId']:0;
+        $values['city'] = isset($this->values['city'])?$this->values['city']:response(400,'市不能为空');
+        $values['content'] = isset($this->values['content'])?$this->values['content']:response(400,'内容不能为空');
+        $values['type'] = isset($this->values['type'])?$this->values['type']:response(400,'类型不能为空');
+        $values['blogType'] = isset($this->values['blogType'])?$this->values['blogType']:response(400,'博文类型不能为空');
+        $data['result'] = $this->model->search($values);
+        if($data)response(200,'success',$data);
+        response(200,'success');
+    }
 }
 
 ?>
